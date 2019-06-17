@@ -3,9 +3,10 @@
 #include "dado.h"
 #include "cache.h"
 #include "processador.h"
+#include "memoria.h"
 
 int main() {
-/* Criando memórias cache */
+/* Criando memórias cache e principal */
     int qtd_cores = 0;
     do {
         std::cout << "Quantos cores deseja adicionar? ";
@@ -15,22 +16,12 @@ int main() {
         }
     } while (qtd_cores % 2 != 0);
 
+    Memoria memory(10);
+
     Processador * lista = new Processador[qtd_cores/2];
-
-/* Criando memória principal */
-    Dado * memory = new Dado[10];
-    for (int i = 0; i < 10; i++) {
-        memory[i] = Dado(i,i,nullptr);
+    for(int i = 0; i < qtd_cores/2; i++){
+        lista[i].defineMemoriaPrincipal(memory);
     }
-
-    memory[7].setValor(31);
-    memory[8].setValor(33);
-
-    std::cout << "\n";
-    for (int i = 0; i < 10; i++) {
-        std::cout << memory[i].getValor() << " ";
-    }
-    std::cout << "\n";
 
 /* Verificação da tarefa a ser executada */    
     int op = 0;
@@ -39,31 +30,29 @@ int main() {
     std::cout << "\n\n";
 
     if(op == 1) {
-        int end = 0;
+        int endereco = 0;
         std::cout << "Informe o endereco: ";
-        std::cin >> end;
-        int cache = 0;
+        std::cin >> endereco;
+        int IDcache = 0;
         std::cout << "Informe a cache: ";
-        std::cin >> cache;
+        std::cin >> IDcache;
 
         int temp = 0;
         int p = 0;
-        if(cache % 2 == 0) {
+        if(IDcache % 2 == 0) {
             temp = 2;
-            p = cache/2;
+            p = IDcache/2;
         }else{
             temp = 1;
-            p = (cache+1)/2;
+            p = (IDcache+1)/2;
         }
 
-        lista[p-1].leitura(temp, end);
+        lista[p-1].leitura(temp, endereco);
 
         lista[p-1].getL2();
 
         //lista[0].leitura(cache, &memory[1]);
     }
     
-    
-    delete [] memory;
     return 0;
 }

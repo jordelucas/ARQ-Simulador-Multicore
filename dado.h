@@ -13,7 +13,7 @@ class Dado {
         int getValor();
         int getEndereco();
         void setValor(int num);
-        void setInferior(Dado * inferior);
+        void setInferior(Dado inferior);
 };
 
 #endif

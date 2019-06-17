@@ -9,18 +9,28 @@ Cache::Cache(int qtd){
     posicaoAtual = 0;
 }
 
-void Cache::leitura(Dado * dado){
+void Cache::setDado(Dado dado){
     L1[posicaoAtual] = dado;
+    L1[posicaoAtual].setInferior(dado);
     posicaoAtual++;
 }
 
+Dado Cache::getDado(int endereco){
+    for (int i = 0; i < totalPosicoes; i++) {
+        if(L1[i].getEndereco() == endereco) {
+            return L1[i];
+        }
+    }      
+}
+
+/*
 void Cache::getL1 () {
     for (int i = 0; i < totalPosicoes; i++) {
         std::cout << "L1 - " << L1[i]->getValor() << "\n";
     }
     std::cout << "\n";
 }
-
+*/
 bool Cache::verificarEnd(int end) {
     for (int i = 0; i < totalPosicoes; i++) {
         if(posicaoAtual == 0){

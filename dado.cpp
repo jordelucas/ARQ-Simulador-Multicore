@@ -16,6 +16,6 @@ void Dado::setValor(int num) {
     valor = num;
 }
 
-void Dado::setInferior(Dado * inferior) {
-    camadaInferior = inferior;
+void Dado::setInferior(Dado inferior) {
+    camadaInferior = &inferior;
 }

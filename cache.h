@@ -12,7 +12,8 @@ class Cache {
     public:
         Cache();
         Cache(int qtd);
-        void leitura(Dado * dado);
+        Dado getDado(int endereco);
+        void setDado(Dado dado);
         bool verificarEnd(int endereco);
         void getL1();
 };
