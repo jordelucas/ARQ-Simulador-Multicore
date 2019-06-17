@@ -1,17 +1,17 @@
-#ifndef CORE_H
-#define CORE_H
+#ifndef CACHE_H
+#define CACHE_H
 
 #include "dado.h"
 
-class Core {
+class Cache {
     private:
-        Dado ** L1;
+        Dado * L1;
         int posicaoAtual;
         int totalPosicoes;
     
     public:
-        Core();
-        Core(int qtd);
+        Cache();
+        Cache(int qtd);
         void leitura(Dado * dado);
         bool verificarEnd(int endereco);
         void getL1();
