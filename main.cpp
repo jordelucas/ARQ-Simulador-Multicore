@@ -15,22 +15,22 @@ int main() {
         }
     } while (qtd_cores % 2 != 0);
 
-    Dado * memory = new Dado[10];
+    Dado ** memory = new Dado*[10];
     for (int i = 0; i < 10; i++) {
-        memory[i] = Dado(i,i);
+        memory[i] = new Dado(i,i);
     }
 
-    memory[7].setValor(31);
-    memory[8].setValor(33);
+    memory[7]->setValor(31);
+    memory[8]->setValor(33);
 
     std::cout << "\n";
     for (int i = 0; i < 10; i++) {
-        std::cout << memory[i].getValor() << " ";
+        std::cout << memory[i]->getValor() << " ";
     }
     std::cout << "\n";
 
     Processador * lista = new Processador[qtd_cores/2];
-    /*
+    
     int op = 0;
     std::cout << "Deseja fazer leitura(1) ou atualizar dado(2)? ";
     std::cin >> op;
@@ -43,9 +43,24 @@ int main() {
         int cache = 0;
         std::cout << "Informe a cache: ";
         std::cin >> cache;
-        lista[0].leitura(cache, &memory[1]);
+
+        int temp = 0;
+        int p = 0;
+        if(cache % 2 == 0) {
+            temp = 0;
+            p = cache/2;
+        }else{
+            temp = 1;
+            p = (cache+1)/2;
+        }
+
+        lista[p-1].leitura(temp, memory[end]);
+
+        lista[p-1].getL2();
+
+        //lista[0].leitura(cache, &memory[1]);
     }
-    */
+    
     
     delete [] memory;
     return 0;

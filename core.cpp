@@ -7,9 +7,8 @@ Core::Core(int qtd){
     totalPosicoes = qtd;
     L1 = new Dado*[totalPosicoes];
     for (int i = 0; i < totalPosicoes; i++) {
-        L1[i] = new Dado(888,888);
+        L1[i] = nullptr;
     }
-    getL1();
 }
 
 void Core::leitura(Dado * dado){

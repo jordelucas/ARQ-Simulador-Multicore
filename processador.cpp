@@ -8,21 +8,23 @@ Processador::Processador() {
 
     L2 = new Dado*[totalPosicoes];
     for (int i = 0; i < totalPosicoes; i++) {
-        L2[i] = new Dado(999,999);
+        L2[i] = nullptr;
     }
-    getL2();
 }
 
 void Processador::leitura(int cache, Dado * dado){
     L2[posicaoAtual] = dado;
     posicaoAtual++;
     if(cache == 0){
-        c1->leitura(dado);
+        c2->leitura(dado);
     }
 }
 
 void Processador::getL2() {
     for (int i = 0; i < totalPosicoes; i++) {
+        if(L2[i] == nullptr){
+            break;
+        }
         std::cout << "L2 - " << L2[i]->getValor() << "\n";
     }
     std::cout << "\n";
