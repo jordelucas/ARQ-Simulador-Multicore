@@ -22,3 +22,16 @@ void Core::getL1 () {
     }
     std::cout << "\n";
 }
+
+bool Core::verificarEnd(int end) {
+    for (int i = 0; i < totalPosicoes; i++) {
+        if(L1[i] == nullptr){
+            return false;
+        }else{
+            if(L1[i]->getEndereco() == end) {
+                return true;
+            }
+        }
+    }
+    return false;
+}

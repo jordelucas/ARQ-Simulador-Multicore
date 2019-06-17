@@ -13,6 +13,7 @@ class Core {
         Core();
         Core(int qtd);
         void leitura(Dado * dado);
+        bool verificarEnd(int endereco);
         void getL1();
 };
 

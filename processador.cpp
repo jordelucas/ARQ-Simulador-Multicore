@@ -13,11 +13,49 @@ Processador::Processador() {
 }
 
 void Processador::leitura(int cache, Dado * dado){
-    L2[posicaoAtual] = dado;
-    posicaoAtual++;
     if(cache == 0){
-        c2->leitura(dado);
+        if(c2->verificarEnd(dado->getEndereco()) == false) {
+            bool situacao = false;
+            for (int i = 0; i < totalPosicoes; i++) {
+                if(L2[i] == nullptr){
+                    situacao = false;
+                    break;
+                }else{
+                    if(L2[i]->getEndereco() == dado->getEndereco()) {
+                        situacao = true;
+                        break;
+                    }
+                }
+            }
+            if(situacao == false) {
+                L2[posicaoAtual] = dado;
+                posicaoAtual++;
+            }
+            c2->leitura(dado);
+        }
+    }else{
+        if(c1->verificarEnd(dado->getEndereco()) == false) {
+            bool situacao = false;
+            for (int i = 0; i < totalPosicoes; i++) {
+                if(L2[i] == nullptr){
+                    situacao = false;
+                    break;
+                }else{
+                    if(L2[i]->getEndereco() == dado->getEndereco()) {
+                        situacao = true;
+                        break;
+                    }
+                }
+            }
+            if(situacao == false) {
+                L2[posicaoAtual] = dado;
+                posicaoAtual++;
+            }
+            c1->leitura(dado);
+        }        
     }
+
+
 }
 
 void Processador::getL2() {
