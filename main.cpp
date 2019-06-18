@@ -6,7 +6,14 @@
 #include "memoria.h"
 
 int main() {
-/* Criando memórias cache e principal */
+
+/* Cria memória principal */
+
+    Memoria memory(10);  
+    std::cout << "ok";  
+    Memoria * pontMemory = &memory;
+
+/* Cria memórias cache */    
     int qtd_cores = 0;
     do {
         std::cout << "Quantos cores deseja adicionar? ";
@@ -15,14 +22,11 @@ int main() {
             std::cout << "\nÉ necerrário entrar com um número multiplo de 2!\n";
         }
     } while (qtd_cores % 2 != 0);
-
-    Memoria memory(10);
-
     Processador * lista = new Processador[qtd_cores/2];
-    for(int i = 0; i < qtd_cores/2; i++){
-        lista[i].defineMemoriaPrincipal(memory);
-    }
 
+    for(int i = 0; i < qtd_cores/2; i++){
+        lista[i].defineMemoriaPrincipal(pontMemory);
+    }
 /* Verificação da tarefa a ser executada */    
     int op = 0;
     std::cout << "Deseja fazer leitura(1), atualizar dado(2) ou sair(3)? ";
@@ -47,9 +51,11 @@ int main() {
             p = (IDcache+1)/2;
         }
 
-        lista[p-1].leitura(temp, endereco);
+        lista[p-1].leitura(temp, endereco); //Seleciona o processador correto 
+                                            //e passa como parâmetro a cache e
+                                            //o endereço da memoria principal 
 
-        lista[p-1].getL2();
+        //lista[p-1].getL2();
 
         //lista[0].leitura(cache, &memory[1]);
     }

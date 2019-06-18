@@ -33,12 +33,8 @@ void Cache::getL1 () {
 */
 bool Cache::verificarEnd(int end) {
     for (int i = 0; i < totalPosicoes; i++) {
-        if(posicaoAtual == 0){
-            return false;
-        }else{
-            if(L1[i].getEndereco() == end) {
-                return true;
-            }
+        if(L1[i].getEndereco() == end) {
+            return true;
         }
     }
     return false;

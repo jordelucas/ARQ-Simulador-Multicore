@@ -9,14 +9,19 @@ Processador::Processador() {
     memory = nullptr;
 }
 
-void Processador::defineMemoriaPrincipal(Memoria memoryPrimary){
-    memory = &memoryPrimary;
+void Processador::defineMemoriaPrincipal(Memoria * memoryPrimary){
+    memory = memoryPrimary;
 }
 
 void Processador::leitura(int id_cache, int end){
+    std::cout << "oi\n";
+    std::cout << memory->getDado(7).getValor();
     if(id_cache == 2){
+        std::cout << "ent2\n";
         if(c2->verificarEnd(end) == false) {
+            std::cout << "nao passou na verificação do endereço da L1\n";
             if(L2->verificarEnd(end) == false) {
+                std::cout << "nao passou na verificação do endereço da L2\n";
                 if(memory->verificarEnd(end) == false) {
                     std::cout << "O endereço solicitado não faz parte da memória principal!\n";
                     return;
@@ -31,6 +36,7 @@ void Processador::leitura(int id_cache, int end){
             std::cout << "Cache hit!\n";
         }
     }else{
+        std::cout << "ent1\n";
         if(c1->verificarEnd(end) == false) {
             if(L2->verificarEnd(end) == false) {
                 if(memory->verificarEnd(end) == false) {
@@ -48,14 +54,10 @@ void Processador::leitura(int id_cache, int end){
         }        
     }
 }
-/*
+
 void Processador::getL2() {
     for (int i = 0; i < totalPosicoes; i++) {
-        if(L2[i] == nullptr){
-            break;
-        }
-        std::cout << "L2 - " << L2[i]->getValor() << "\n";
+        std::cout << "Memoria - " << memory->getDado(i).getValor() << "\n";
     }
     std::cout << "\n";
 }
- */

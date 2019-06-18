@@ -16,7 +16,7 @@ class Processador {
     
     public:
         Processador();
-        void defineMemoriaPrincipal(Memoria memoryPrimary);
+        void defineMemoriaPrincipal(Memoria * memoryPrimary);
         void leitura(int id_cache, int end);
         void getL2();
 };

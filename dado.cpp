@@ -1,6 +1,6 @@
 #include "dado.h"
 
-Dado::Dado() : valor(0), endereco(0), camadaInferior(nullptr) {};
+Dado::Dado() : valor(-1), endereco(-1), camadaInferior(nullptr) {};
 
 Dado::Dado(int num, int id, Dado * inferior) : valor(num), endereco(id), camadaInferior(inferior){};
 
