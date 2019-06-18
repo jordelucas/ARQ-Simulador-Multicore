@@ -10,7 +10,6 @@ int main() {
 /* Cria memória principal */
 
     Memoria memory(10);  
-    std::cout << "ok";  
     Memoria * pontMemory = &memory;
 
 /* Cria memórias cache */    
@@ -54,6 +53,12 @@ int main() {
         lista[p-1].leitura(temp, endereco); //Seleciona o processador correto 
                                             //e passa como parâmetro a cache e
                                             //o endereço da memoria principal 
+        lista[p-1].leitura(temp, endereco+1);
+        lista[p-1].leitura(temp, endereco+2);
+        lista[p-1].leitura(temp, endereco+3);
+        lista[p-1].leitura(temp, endereco+4);
+        lista[p-1].leitura(temp, endereco+5);
+        lista[p-1].leitura(temp, endereco+12);
 
         //lista[p-1].getL2();
 

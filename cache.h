@@ -15,7 +15,7 @@ class Cache {
         Dado getDado(int endereco);
         void setDado(Dado dado);
         bool verificarEnd(int endereco);
-        void getL1();
+        void getCache();
 };
 
 #endif

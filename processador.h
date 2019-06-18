@@ -18,7 +18,6 @@ class Processador {
         Processador();
         void defineMemoriaPrincipal(Memoria * memoryPrimary);
         void leitura(int id_cache, int end);
-        void getL2();
 };
 
 #endif

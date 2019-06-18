@@ -13,13 +13,9 @@ Memoria::~Memoria() {
     delete[] memory;
 }
 
-bool Memoria::verificarEnd(int end) {
-    std::cout << "verificando se o endereço solicitado está na memória principal\n";
+bool Memoria::verificarEnd(int endereco) {
     for (int i = 0; i < totalPosicoes; i++) {
-        std::cout << "Buscando...\n";
-        std::cout << memory[i].getValor() << "\n";
-        if(memory[i].getEndereco() == end) {
-            std::cout << "Está na posicao: " << i << "\n";            
+        if(memory[i].getEndereco() == endereco) {         
             return true;
         }
     }
@@ -38,8 +34,7 @@ Dado Memoria::getDado(int endereco) {
 void Memoria::getMemoria() {
     std::cout << "\n";
     for (int i = 0; i < totalPosicoes; i++) {
-        std::cout << memory[i].getValor() << " ";
+        std::cout << memory[i].getValor() << "|" << memory[i].getEndereco() << "\n";
     }
     std::cout << "\n";
-
 }
