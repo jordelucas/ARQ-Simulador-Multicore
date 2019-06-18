@@ -26,44 +26,47 @@ int main() {
     for(int i = 0; i < qtd_cores/2; i++){
         lista[i].defineMemoriaPrincipal(pontMemory);
     }
-/* Verificação da tarefa a ser executada */    
-    int op = 0;
-    std::cout << "Deseja fazer leitura(1), atualizar dado(2) ou sair(3)? ";
-    std::cin >> op;
-    std::cout << "\n\n";
+/* Verificação da tarefa a ser executada */   
+    int op = -1; 
+    while(op != 0) {
+        std::cout << "Deseja fazer leitura(1), atualizar dado(2) ou sair(0)? ";
+        std::cin >> op;
+        std::cout << "\n\n";
 
-    if(op == 1) {
         int endereco = 0;
-        std::cout << "Informe o endereco: ";
-        std::cin >> endereco;
         int IDcache = 0;
-        std::cout << "Informe a cache: ";
-        std::cin >> IDcache;
-
         int temp = 0;
         int p = 0;
-        if(IDcache % 2 == 0) {
-            temp = 2;
-            p = IDcache/2;
-        }else{
-            temp = 1;
-            p = (IDcache+1)/2;
+
+        switch (op) {
+            case 1:
+                std::cout << "Informe o endereco: ";
+                std::cin >> endereco;
+                std::cout << "Informe a cache: ";
+                std::cin >> IDcache;
+
+                if(IDcache % 2 == 0) {
+                    temp = 2;
+                    p = IDcache/2;
+                }else{
+                    temp = 1;
+                    p = (IDcache+1)/2;
+                }
+
+                lista[p-1].leitura(temp, endereco); //Seleciona o processador correto 
+                                                    //e passa como parâmetro a cache e
+                                                    //o endereço da memoria principal
+                break;
+            /*case 2:
+                break;*/
+            case 0:
+                break;
+            default:
+                std::cout << "Opção inválida!\n";
+                break;
         }
-
-        lista[p-1].leitura(temp, endereco); //Seleciona o processador correto 
-                                            //e passa como parâmetro a cache e
-                                            //o endereço da memoria principal 
-        lista[p-1].leitura(temp, endereco+1);
-        lista[p-1].leitura(temp, endereco+2);
-        lista[p-1].leitura(temp, endereco+3);
-        lista[p-1].leitura(temp, endereco+4);
-        lista[p-1].leitura(temp, endereco+5);
-        lista[p-1].leitura(temp, endereco+12);
-
-        //lista[p-1].getL2();
-
-        //lista[0].leitura(cache, &memory[1]);
     }
+    
     
     return 0;
 }

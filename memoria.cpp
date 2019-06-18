@@ -32,7 +32,6 @@ Dado Memoria::getDado(int endereco) {
 
 
 void Memoria::getMemoria() {
-    std::cout << "\n";
     for (int i = 0; i < totalPosicoes; i++) {
         std::cout << memory[i].getValor() << "|" << memory[i].getEndereco() << "\n";
     }
