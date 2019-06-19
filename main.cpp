@@ -36,6 +36,7 @@ int main() {
         int IDcache = 0;
         int temp = 0;
         int p = 0;
+        int novoValor = 0;
 
         switch (op) {
             case 1:
@@ -61,6 +62,8 @@ int main() {
                 std::cin >> IDcache;
                 std::cout << "Informe o endereco que deseja atualizar o valor: ";
                 std::cin >> endereco;  
+                std::cout << "Informe o novo valor: ";
+                std::cin >> novoValor;
 
                 if(IDcache % 2 == 0) {
                     temp = 2;

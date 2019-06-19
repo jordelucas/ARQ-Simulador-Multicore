@@ -19,3 +19,7 @@ void Dado::setValor(int num) {
 void Dado::setInferior(Dado inferior) {
     camadaInferior = &inferior;
 }
+
+Dado * Dado::getInferior() {
+    return camadaInferior;
+}

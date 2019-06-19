@@ -27,7 +27,8 @@ Dado Memoria::getDado(int endereco) {
         if(memory[i].getEndereco() == endereco) {
             return memory[i];
         }
-    }    
+    } 
+    return Dado();    
 }
 
 

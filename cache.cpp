@@ -28,7 +28,8 @@ Dado Cache::getDado(int endereco){
         if(L1[i].getEndereco() == endereco) {
             return L1[i];
         }
-    }      
+    }  
+    return Dado();    
 }
 
 
