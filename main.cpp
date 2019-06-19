@@ -8,7 +8,6 @@
 int main() {
 
 /* Cria memória principal */
-
     Memoria memory(10);  
     Memoria * pontMemory = &memory;
 
@@ -40,9 +39,9 @@ int main() {
 
         switch (op) {
             case 1:
-                std::cout << "Informe o endereco: ";
+                std::cout << "Informe o endereco que deseja para leitura: ";
                 std::cin >> endereco;
-                std::cout << "Informe a cache: ";
+                std::cout << "Informe a cache que será utilizada: ";
                 std::cin >> IDcache;
 
                 if(IDcache % 2 == 0) {
@@ -57,8 +56,25 @@ int main() {
                                                     //e passa como parâmetro a cache e
                                                     //o endereço da memoria principal
                 break;
-            /*case 2:
-                break;*/
+            case 2:
+                std::cout << "Informe a cache que será utilizada: ";
+                std::cin >> IDcache;
+                std::cout << "Informe o endereco que deseja atualizar o valor: ";
+                std::cin >> endereco;  
+
+                if(IDcache % 2 == 0) {
+                    temp = 2;
+                    p = IDcache/2;
+                }else{
+                    temp = 1;
+                    p = (IDcache+1)/2;
+                }          
+
+                lista[p-1].escrita(temp, endereco); //Seleciona o processador correto 
+                                                    //e passa como parâmetro a cache e
+                                                    //o endereço da memoria principal 
+                                                    //que deseja alterar valor               
+                break;
             case 0:
                 break;
             default:

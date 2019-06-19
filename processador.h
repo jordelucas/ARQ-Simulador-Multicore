@@ -18,6 +18,7 @@ class Processador {
         Processador();
         void defineMemoriaPrincipal(Memoria * memoryPrimary);
         void leitura(int id_cache, int end);
+        void escrita(int id_cache, int end);
 };
 
 #endif

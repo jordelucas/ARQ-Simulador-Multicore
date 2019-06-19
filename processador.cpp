@@ -52,3 +52,9 @@ void Processador::leitura(int id_cache, int end){
     c1->getCache();
     c2->getCache();
 }
+
+void Processador::escrita(int id_cache, int end){
+    if(id_cache == 2){
+    
+    }
+}
