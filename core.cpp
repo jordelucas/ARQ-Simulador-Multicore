@@ -11,6 +11,7 @@ Core::Core(Cache * ni){                 //ni = Nível Inferior
 
 bool Core::leitura(int endereco){
     Dado * dado = cache.getDado(endereco);
+    std::cout << "entrou aqui\n";
     if(dado != nullptr){
         std::cout << "\nO valor do endereço solicitado é: " << dado->getValor() << "\n";
         return true;
@@ -30,11 +31,11 @@ bool Core::escrita(int endereco, int novoValor){
     Dado * dado = cache.getDado(endereco);
     if(dado != nullptr){
         dado->setValor(novoValor);
-        do{
+        /*do{
             std::cout << dado->getInferior()->getInferior() << "|entrou|\n";
             dado->getInferior()->setValor(novoValor);
             dado = dado->getInferior();
-        }while(dado->getInferior() != nullptr);
+        }while(dado->getInferior() != nullptr); */
         std::cout << "O valor do endereço informado foi alterado para: " << dado->getValor() << "\n";
         return true;
     }else{

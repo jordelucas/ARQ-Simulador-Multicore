@@ -5,7 +5,7 @@
 
 class Cache {
     private:
-        Dado * L1;
+        Dado ** L1;
         int posicaoAtual;
         int totalPosicoes;
         Cache * nivelInferio;

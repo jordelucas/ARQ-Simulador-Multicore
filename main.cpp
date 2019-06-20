@@ -21,13 +21,7 @@ int main() {
     Processador * lista = new Processador[qtd_cores/2];
 
 /* Cria memória principal */
-    Memoria memory(10);  
-
-/* Vincula memória principal aos processadores */
-    Memoria * pontMemory = &memory;
-    for(int i = 0; i < qtd_cores/2; i++){
-        lista[i].defineMemoriaPrincipal(pontMemory);
-    }
+    Memoria memory(10); 
 
 /* Verificação da tarefa a ser executada */   
     int op = -1; 
@@ -128,40 +122,9 @@ int main() {
             }else{
                 core->listarDados();
             }
+        }else if (op == 0) {
+            break;
         }
-        
-                //lista[p-1].leitura(temp, endereco); //Seleciona o processador correto 
-                                                    //e passa como parâmetro a cache e
-                                                    //o endereço da memoria principal
-                //break;
-
-            /*case 2:
-                std::cout << "Informe a cache que será utilizada: ";
-                std::cin >> idCore;
-                std::cout << "Informe o endereco que deseja atualizar o valor: ";
-                std::cin >> endereco;  
-                std::cout << "Informe o novo valor: ";
-                std::cin >> novoValor;
-
-                if(idCore % 2 == 0) {
-                    temp = 2;
-                    p = idCore/2;
-                }else{
-                    temp = 1;
-                    p = (idCore+1)/2;
-                }          
-
-                //lista[p-1].escrita(temp, endereco); //Seleciona o processador correto 
-                                                    //e passa como parâmetro a cache e
-                                                    //o endereço da memoria principal 
-                                                    //que deseja alterar valor               
-                break;
-            case 0:
-                break; */
-            //default:
-            //    std::cout << "Opção inválida!\n";
-            //    break;
-        //}
     }
     return 0;
 }

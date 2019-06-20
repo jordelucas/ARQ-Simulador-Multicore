@@ -5,17 +5,16 @@ Cache::Cache() {} ;
 
 Cache::Cache(int qtd){
     totalPosicoes = qtd;
-    L1 = new Dado[totalPosicoes];
+    L1 = new Dado*[totalPosicoes];
     for(int i = 0; i < totalPosicoes; i++){
-        L1[i] = Dado();
+        L1[i] = nullptr;
     }
     posicaoAtual = 0;
     nivelInferio = nullptr;
 }
 
 void Cache::setDado(Dado * dado){
-    L1[posicaoAtual] = *dado;
-    L1[posicaoAtual].setInferior(dado);
+    L1[posicaoAtual] = dado;
     
     if(posicaoAtual == totalPosicoes-1){
         posicaoAtual = 0;
@@ -26,8 +25,10 @@ void Cache::setDado(Dado * dado){
 
 Dado * Cache::getDado(int endereco){
     for (int i = 0; i < totalPosicoes; i++) {
-        if(L1[i].getEndereco() == endereco) {
-            return &L1[i];
+        if(L1[i] != nullptr) {
+            if(L1[i]->getEndereco() == endereco) {
+                return L1[i];
+            }
         }
     }  
     return nullptr;    
@@ -36,10 +37,10 @@ Dado * Cache::getDado(int endereco){
 
 void Cache::listar () {
     for (int i = 0; i < totalPosicoes; i++) {
-        if(L1[i].getEndereco() == -1){
+        if(L1[i] == nullptr){
             std::cout << "disponível\n";
         }else{
-            std::cout << L1[i].getValor() << "|" << L1[i].getEndereco() << "\n";
+            std::cout << L1[i]->getValor() << "|" << L1[i]->getEndereco() << "\n";
         }
     }
     std::cout << "\n";
@@ -47,7 +48,7 @@ void Cache::listar () {
 
 bool Cache::verificarEnd(int end) {
     for (int i = 0; i < totalPosicoes; i++) {
-        if(L1[i].getEndereco() == end) {
+        if(L1[i] == nullptr) {
             return true;
         }
     }

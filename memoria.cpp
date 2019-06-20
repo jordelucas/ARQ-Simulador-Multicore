@@ -5,7 +5,7 @@ Memoria::Memoria(int qtd){
     totalPosicoes = qtd;
     memory = new Dado[totalPosicoes];
     for (int i = 0; i < 10; i++) {
-        memory[i] = Dado(i+1,i,nullptr);
+        memory[i] = Dado(i+1,i);
     }
 }
 
