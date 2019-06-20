@@ -14,7 +14,7 @@ class Cache {
         Cache();
         Cache(int qtd);
         Dado getDado(int endereco);
-        void setDado(Dado dado);
+        void setDado(Dado *dado);
         bool verificarEnd(int endereco);
         void listar();
 };

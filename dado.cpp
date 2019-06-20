@@ -1,8 +1,8 @@
 #include "dado.h"
 
-Dado::Dado() : valor(-1), endereco(-1), camadaInferior(nullptr) {};
+Dado::Dado() : valor(-1), endereco(-1), nivelInferior(nullptr) {};
 
-Dado::Dado(int num, int id, Dado * inferior) : valor(num), endereco(id), camadaInferior(inferior){};
+Dado::Dado(int num, int id, Dado * inferior) : valor(num), endereco(id), nivelInferior(inferior){};
 
 int Dado::getValor() {
     return valor;
@@ -16,10 +16,10 @@ void Dado::setValor(int num) {
     valor = num;
 }
 
-void Dado::setInferior(Dado inferior) {
-    camadaInferior = &inferior;
+void Dado::setInferior(Dado * inferior) {
+    nivelInferior = inferior;
 }
 
 Dado * Dado::getInferior() {
-    return camadaInferior;
+    return nivelInferior;
 }

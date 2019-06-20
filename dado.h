@@ -5,7 +5,7 @@ class Dado {
     private:
         int valor;
         int endereco;
-        Dado * camadaInferior;
+        Dado * nivelInferior;
 
     public:
         Dado();
@@ -13,7 +13,7 @@ class Dado {
         int getValor();
         int getEndereco();
         void setValor(int num);
-        void setInferior(Dado inferior);
+        void setInferior(Dado * inferior);
         Dado * getInferior();
 };
 

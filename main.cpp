@@ -42,35 +42,82 @@ int main() {
         int p = 0;
         int novoValor = 0;
 
-        //switch (op) {
-            //case 1:
-                std::cout << "Informe o core que será utilizado: ";
-                std::cin >> idCore;
+        if(op == 1){
+            std::cout << "Informe o core que será utilizado: ";
+            std::cin >> idCore;
 
-                /*  Identifica o processador em que se encontra o 
-                    core solicitado e qual dos dois foi o escolhido */
-                if(idCore % 2 == 0) {
-                    temp = 2;
-                    p = idCore/2;
+            /*  Identifica o processador em que se encontra o 
+                core solicitado e determina qual dos dois foi 
+                o escolhido */
+            if(idCore % 2 == 0) {
+                temp = 2;
+                p = idCore/2;
+            }else{
+                temp = 1;
+                p = (idCore+1)/2;
+            }
+            Core * core = lista[p-1].getCore(idCore);
+
+            std::cout << "Informe o endereço que deseja fazer leitura: ";
+            std::cin >> endereco;
+
+            /*  Busca pelo respectivo dado do endereço informado */
+            /*  Caso não encontre nas memórias cache, é feita 
+                uma busca na memória principal.*/
+            if(core->leitura(endereco) == false){
+                Dado dado = memory.getDado(endereco);
+                if(dado.getEndereco() != -1){
+                    /*  Ao encontrar o endereço na emória principal, 
+                        o dado é carregado nas memórias cache para
+                        novamente ser chamada a leitura */
+                    core->setCache(dado);
+                    core->leitura(endereco);
                 }else{
-                    temp = 1;
-                    p = (idCore+1)/2;
+                    /*  Não encontrando o endereço informado, é exibida 
+                        a mensagem de notificação do ocorrigo*/
+                    std::cout << "O endereço solicitado não faz parte da memória principal!\n";
                 }
-                Core * core = lista[p-1].getCore(idCore);
+            }
+        }else if (op == 2) {
+            std::cout << "Informe o core que será utilizado: ";
+            std::cin >> idCore;
 
-                std::cout << "Informe o endereço que deseja fazer leitura: ";
-                std::cin >> endereco;
+            /*  Identifica o processador em que se encontra o 
+                core solicitado e determina qual dos dois foi 
+                o escolhido */
+            if(idCore % 2 == 0) {
+                temp = 2;
+                p = idCore/2;
+            }else{
+                temp = 1;
+                p = (idCore+1)/2;
+            }
+            Core * core = lista[p-1].getCore(idCore);
 
-                if(core->leitura(endereco) == false){
-                    Dado dado = memory.getDado(endereco);
-                    if(dado.getEndereco() != -1){
-                        core->setCache(dado);
-                        core->leitura(endereco);
-                    }else{
-                        std::cout << "O endereço solicitado não faz parte da memória principal!\n";
-                    }
+            std::cout << "Informe o endereço que deseja alterar valor: ";
+            std::cin >> endereco;
+            std::cout << "Informe o novo valor: ";
+            std::cin >> novoValor;
+
+            /*  Busca pelo respectivo dado do endereço informado */
+            /*  Caso não encontre nas memórias cache, é feita 
+                uma busca na memória principal.*/
+            if(core->escrita(endereco, novoValor) == false){
+                Dado dado = memory.getDado(endereco);
+                if(dado.getEndereco() != -1){
+                    /*  Ao encontrar o endereço na emória principal, 
+                        o dado é carregado nas memórias cache para
+                        novamente ser chamada a escrita */
+                    core->setCache(dado);
+                    core->escrita(endereco, novoValor);
+                }else{
+                    /*  Não encontrando o endereço informado, é exibida 
+                        a mensagem de notificação do ocorrigo*/
+                    std::cout << "O endereço solicitado não faz parte da memória principal!\n";
                 }
-
+            }
+        }
+        
                 //lista[p-1].leitura(temp, endereco); //Seleciona o processador correto 
                                                     //e passa como parâmetro a cache e
                                                     //o endereço da memoria principal

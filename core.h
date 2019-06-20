@@ -13,7 +13,7 @@ class Core {
         Core();
         Core(Cache * nivelInferior);
         bool leitura(int endereco);
-        bool escrita();
+        bool escrita(int endereco, int novoValor);
         void setCache(Dado dado);
 };
 

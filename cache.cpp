@@ -13,8 +13,8 @@ Cache::Cache(int qtd){
     nivelInferio = nullptr;
 }
 
-void Cache::setDado(Dado dado){
-    L1[posicaoAtual] = dado;
+void Cache::setDado(Dado *dado){
+    L1[posicaoAtual] = *dado;
     L1[posicaoAtual].setInferior(dado);
     
     if(posicaoAtual == totalPosicoes-1){
