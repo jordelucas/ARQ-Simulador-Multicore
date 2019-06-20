@@ -4,12 +4,13 @@
 #include "dado.h"
 #include "cache.h"
 #include "memoria.h"
+#include "core.h"
 
 class Processador {
     private:
-        Cache * c1;
-        Cache * c2;
-        Cache * L2;
+        Core c1;
+        Core c2;
+        Cache L2;
         Memoria * memory;
         int posicaoAtual;
         int totalPosicoes;
@@ -17,6 +18,7 @@ class Processador {
     public:
         Processador();
         void defineMemoriaPrincipal(Memoria * memoryPrimary);
+        Core * getCore(int idCore);
         void leitura(int id_cache, int end);
         void escrita(int id_cache, int end);
 };

@@ -10,6 +10,7 @@ Cache::Cache(int qtd){
         L1[i] = Dado();
     }
     posicaoAtual = 0;
+    nivelInferio = nullptr;
 }
 
 void Cache::setDado(Dado dado){
@@ -33,7 +34,7 @@ Dado Cache::getDado(int endereco){
 }
 
 
-void Cache::getCache () {
+void Cache::listar () {
     for (int i = 0; i < totalPosicoes; i++) {
         std::cout << L1[i].getValor() << "|" << L1[i].getEndereco() << "\n";
     }

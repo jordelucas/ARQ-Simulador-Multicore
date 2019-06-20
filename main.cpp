@@ -7,11 +7,7 @@
 
 int main() {
 
-/* Cria memória principal */
-    Memoria memory(10);  
-    Memoria * pontMemory = &memory;
-
-/* Cria memórias cache */    
+/* Solicita quantidade de memórias cache */    
     int qtd_cores = 0;
     do {
         std::cout << "Quantos cores deseja adicionar? ";
@@ -20,11 +16,19 @@ int main() {
             std::cout << "\nÉ necerrário entrar com um número multiplo de 2!\n";
         }
     } while (qtd_cores % 2 != 0);
+
+/* Cria array de processadores */
     Processador * lista = new Processador[qtd_cores/2];
 
+/* Cria memória principal */
+    Memoria memory(10);  
+
+/* Vincula memória principal aos processadores */
+    Memoria * pontMemory = &memory;
     for(int i = 0; i < qtd_cores/2; i++){
         lista[i].defineMemoriaPrincipal(pontMemory);
     }
+
 /* Verificação da tarefa a ser executada */   
     int op = -1; 
     while(op != 0) {
@@ -33,59 +37,72 @@ int main() {
         std::cout << "\n\n";
 
         int endereco = 0;
-        int IDcache = 0;
+        int idCore = 0;
         int temp = 0;
         int p = 0;
         int novoValor = 0;
 
-        switch (op) {
-            case 1:
-                std::cout << "Informe o endereco que deseja para leitura: ";
-                std::cin >> endereco;
-                std::cout << "Informe a cache que será utilizada: ";
-                std::cin >> IDcache;
+        //switch (op) {
+            //case 1:
+                std::cout << "Informe o core que será utilizado: ";
+                std::cin >> idCore;
 
-                if(IDcache % 2 == 0) {
+                /*  Identifica o processador em que se encontra o 
+                    core solicitado e qual dos dois foi o escolhido */
+                if(idCore % 2 == 0) {
                     temp = 2;
-                    p = IDcache/2;
+                    p = idCore/2;
                 }else{
                     temp = 1;
-                    p = (IDcache+1)/2;
+                    p = (idCore+1)/2;
+                }
+                Core * core = lista[p-1].getCore(idCore);
+
+                std::cout << "Informe o endereço que deseja fazer leitura: ";
+                std::cin >> endereco;
+
+                if(core->leitura(endereco) == false){
+                    Dado dado = memory.getDado(endereco);
+                    if(dado.getEndereco() != -1){
+                        core->setCache(dado);
+                        core->leitura(endereco);
+                    }else{
+                        std::cout << "O endereço solicitado não faz parte da memória principal!\n";
+                    }
                 }
 
-                lista[p-1].leitura(temp, endereco); //Seleciona o processador correto 
+                //lista[p-1].leitura(temp, endereco); //Seleciona o processador correto 
                                                     //e passa como parâmetro a cache e
                                                     //o endereço da memoria principal
-                break;
-            case 2:
+                //break;
+
+            /*case 2:
                 std::cout << "Informe a cache que será utilizada: ";
-                std::cin >> IDcache;
+                std::cin >> idCore;
                 std::cout << "Informe o endereco que deseja atualizar o valor: ";
                 std::cin >> endereco;  
                 std::cout << "Informe o novo valor: ";
                 std::cin >> novoValor;
 
-                if(IDcache % 2 == 0) {
+                if(idCore % 2 == 0) {
                     temp = 2;
-                    p = IDcache/2;
+                    p = idCore/2;
                 }else{
                     temp = 1;
-                    p = (IDcache+1)/2;
+                    p = (idCore+1)/2;
                 }          
 
-                lista[p-1].escrita(temp, endereco); //Seleciona o processador correto 
+                //lista[p-1].escrita(temp, endereco); //Seleciona o processador correto 
                                                     //e passa como parâmetro a cache e
                                                     //o endereço da memoria principal 
                                                     //que deseja alterar valor               
                 break;
             case 0:
-                break;
-            default:
-                std::cout << "Opção inválida!\n";
-                break;
-        }
+                break; */
+            //default:
+            //    std::cout << "Opção inválida!\n";
+            //    break;
+        //}
     }
-    
-    
     return 0;
 }

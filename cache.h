@@ -8,6 +8,7 @@ class Cache {
         Dado * L1;
         int posicaoAtual;
         int totalPosicoes;
+        Cache * nivelInferio;
     
     public:
         Cache();
@@ -15,7 +16,7 @@ class Cache {
         Dado getDado(int endereco);
         void setDado(Dado dado);
         bool verificarEnd(int endereco);
-        void getCache();
+        void listar();
 };
 
 #endif
