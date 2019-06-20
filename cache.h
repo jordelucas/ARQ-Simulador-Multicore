@@ -13,7 +13,7 @@ class Cache {
     public:
         Cache();
         Cache(int qtd);
-        Dado getDado(int endereco);
+        Dado * getDado(int endereco);
         void setDado(Dado *dado);
         bool verificarEnd(int endereco);
         void listar();

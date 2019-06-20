@@ -22,13 +22,13 @@ bool Memoria::verificarEnd(int endereco) {
     return false;
 }
 
-Dado Memoria::getDado(int endereco) {
+Dado * Memoria::getDado(int endereco) {
     for (int i = 0; i < totalPosicoes; i++) {
         if(memory[i].getEndereco() == endereco) {
-            return memory[i];
+            return &memory[i];
         }
     } 
-    return Dado();    
+    return nullptr;    
 }
 
 

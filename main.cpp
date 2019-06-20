@@ -67,12 +67,12 @@ int main() {
             /*  Caso não encontre nas memórias cache, é feita 
                 uma busca na memória principal.*/
             if(core->leitura(endereco) == false){
-                Dado dado = memory.getDado(endereco);
-                if(dado.getEndereco() != -1){
+                Dado * dado = memory.getDado(endereco);
+                if(dado != nullptr){
                     /*  Ao encontrar o endereço na emória principal, 
                         o dado é carregado nas memórias cache para
                         novamente ser chamada a leitura */
-                    core->setCache(&dado);
+                    core->setCache(dado);
                     core->leitura(endereco);
                     core->listarDados();
                 }else{
@@ -99,6 +99,9 @@ int main() {
             }
             Core * core = lista[processador-1].getCore(idCore);
 
+            /*  Lista os dados das memórias cache e solicita o endereço
+                para escrita e o novo valor a ser atribuído */
+            core->listarDados();
             std::cout << "Informe o endereço que deseja alterar valor: ";
             std::cin >> endereco;
             std::cout << "Informe o novo valor: ";
@@ -108,18 +111,22 @@ int main() {
             /*  Caso não encontre nas memórias cache, é feita 
                 uma busca na memória principal.*/
             if(core->escrita(endereco, novoValor) == false){
-                Dado dado = memory.getDado(endereco);
-                if(dado.getEndereco() != -1){
+                Dado * dado = memory.getDado(endereco);
+                if(dado != nullptr){
                     /*  Ao encontrar o endereço na emória principal, 
                         o dado é carregado nas memórias cache para
                         novamente ser chamada a escrita */
-                    core->setCache(&dado);
+                        std::cout << "veio pra ca!\n";
+                    core->setCache(dado);
                     core->escrita(endereco, novoValor);
+                    core->listarDados();
                 }else{
                     /*  Não encontrando o endereço informado, é exibida 
                         a mensagem de notificação do ocorrigo*/
                     std::cout << "O endereço solicitado não faz parte da memória principal!\n";
                 }
+            }else{
+                core->listarDados();
             }
         }
         

@@ -10,15 +10,15 @@ Core::Core(Cache * ni){                 //ni = Nível Inferior
 }
 
 bool Core::leitura(int endereco){
-    Dado dado = cache.getDado(endereco);
-    if(dado.getEndereco() != -1){
-        std::cout << "\nO valor do endereço solicitado é: " << dado.getValor() << "\n";
+    Dado * dado = cache.getDado(endereco);
+    if(dado != nullptr){
+        std::cout << "\nO valor do endereço solicitado é: " << dado->getValor() << "\n";
         return true;
     }else{
         dado = nivelInferior->getDado(endereco);
-        if(dado.getEndereco() != -1){
-            cache.setDado(&dado);
-            std::cout << "\nO valor do endereço solicitado é: " << dado.getValor() << "\n";
+        if(dado != nullptr){
+            cache.setDado(dado);
+            std::cout << "\nO valor do endereço solicitado é: " << dado->getValor() << "\n";
             return true;
         }else{
             return false;
@@ -27,19 +27,20 @@ bool Core::leitura(int endereco){
 }
 
 bool Core::escrita(int endereco, int novoValor){
-    Dado dado = cache.getDado(endereco);
-    if(dado.getEndereco() != -1){
-        dado.setValor(novoValor);
+    Dado * dado = cache.getDado(endereco);
+    if(dado != nullptr){
+        dado->setValor(novoValor);
         do{
-            dado.getInferior()->setValor(novoValor);
-            dado = *dado.getInferior();
-        }while(dado.getInferior() != nullptr);
-        std::cout << "O novo valor do endereço informado é: " << dado.getValor() << "\n";
+            std::cout << dado->getInferior()->getInferior() << "|entrou|\n";
+            dado->getInferior()->setValor(novoValor);
+            dado = dado->getInferior();
+        }while(dado->getInferior() != nullptr);
+        std::cout << "O valor do endereço informado foi alterado para: " << dado->getValor() << "\n";
         return true;
     }else{
         dado = nivelInferior->getDado(endereco);
-        if(dado.getEndereco() != -1){
-            cache.setDado(&dado);
+        if(dado != nullptr){
+            cache.setDado(dado);
             escrita(endereco, novoValor);
             return true;
         }else{
@@ -50,7 +51,7 @@ bool Core::escrita(int endereco, int novoValor){
 
 void Core::setCache(Dado * dado) {
     nivelInferior->setDado(dado);
-    cache.setDado(dado);
+    cache.setDado(nivelInferior->getDado(dado->getEndereco()));
 }
 
 void Core::listarDados(){

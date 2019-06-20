@@ -24,13 +24,13 @@ void Cache::setDado(Dado * dado){
     }
 }
 
-Dado Cache::getDado(int endereco){
+Dado * Cache::getDado(int endereco){
     for (int i = 0; i < totalPosicoes; i++) {
         if(L1[i].getEndereco() == endereco) {
-            return L1[i];
+            return &L1[i];
         }
     }  
-    return Dado();    
+    return nullptr;    
 }
 
 

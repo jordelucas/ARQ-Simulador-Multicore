@@ -12,7 +12,7 @@ class Memoria {
         Memoria(int qtd);
         ~Memoria();
         bool verificarEnd(int endereco);
-        Dado getDado(int endereco);
+        Dado * getDado(int endereco);
         void getMemoria();
 };
 
