@@ -47,8 +47,8 @@ void Processador::leitura(int id_cache, int end){
             std::cout << "Cache hit!\n";
         }        
     */}
-    memory->getMemoria();
-    L2.listar();
+    //memory->getMemoria();
+    //L2.listar();
     //c1->getCache();
     //c2->getCache();
 }
@@ -95,7 +95,7 @@ void Processador::leitura(int id_cache, int end){
 }*/
 
 Core * Processador::getCore(int idCore) {
-    if(idCore = 1) {
+    if(idCore == 1) {
         return &c1;
     }else{
         return &c2;

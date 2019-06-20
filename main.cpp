@@ -38,8 +38,7 @@ int main() {
 
         int endereco = 0;
         int idCore = 0;
-        int temp = 0;
-        int p = 0;
+        int processador = 0;
         int novoValor = 0;
 
         if(op == 1){
@@ -50,15 +49,18 @@ int main() {
                 core solicitado e determina qual dos dois foi 
                 o escolhido */
             if(idCore % 2 == 0) {
-                temp = 2;
-                p = idCore/2;
+                processador = idCore/2;
+                idCore = 2;
             }else{
-                temp = 1;
-                p = (idCore+1)/2;
+                processador = (idCore+1)/2;
+                idCore = 1;
             }
-            Core * core = lista[p-1].getCore(idCore);
+            Core * core = lista[processador-1].getCore(idCore);
 
-            std::cout << "Informe o endereço que deseja fazer leitura: ";
+            /*  Lista os dados das memórias cache e solicita endereço
+                para leitura */
+            core->listarDados();
+            std::cout << "Informe o endereço que deseja fazer leitura (1-32): ";
             std::cin >> endereco;
 
             /*  Busca pelo respectivo dado do endereço informado */
@@ -70,13 +72,16 @@ int main() {
                     /*  Ao encontrar o endereço na emória principal, 
                         o dado é carregado nas memórias cache para
                         novamente ser chamada a leitura */
-                    core->setCache(dado);
+                    core->setCache(&dado);
                     core->leitura(endereco);
+                    core->listarDados();
                 }else{
                     /*  Não encontrando o endereço informado, é exibida 
                         a mensagem de notificação do ocorrigo*/
                     std::cout << "O endereço solicitado não faz parte da memória principal!\n";
                 }
+            }else{
+                core->listarDados();
             }
         }else if (op == 2) {
             std::cout << "Informe o core que será utilizado: ";
@@ -86,13 +91,13 @@ int main() {
                 core solicitado e determina qual dos dois foi 
                 o escolhido */
             if(idCore % 2 == 0) {
-                temp = 2;
-                p = idCore/2;
+                processador = idCore/2;
+                idCore = 2;
             }else{
-                temp = 1;
-                p = (idCore+1)/2;
+                processador = (idCore+1)/2;
+                idCore = 1;
             }
-            Core * core = lista[p-1].getCore(idCore);
+            Core * core = lista[processador-1].getCore(idCore);
 
             std::cout << "Informe o endereço que deseja alterar valor: ";
             std::cin >> endereco;
@@ -108,7 +113,7 @@ int main() {
                     /*  Ao encontrar o endereço na emória principal, 
                         o dado é carregado nas memórias cache para
                         novamente ser chamada a escrita */
-                    core->setCache(dado);
+                    core->setCache(&dado);
                     core->escrita(endereco, novoValor);
                 }else{
                     /*  Não encontrando o endereço informado, é exibida 
