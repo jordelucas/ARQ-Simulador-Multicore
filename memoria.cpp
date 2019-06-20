@@ -4,13 +4,18 @@
 Memoria::Memoria(int qtd){
     totalPosicoes = qtd;
     memory = new Dado[totalPosicoes];
-    for (int i = 0; i < 10; i++) {
-        memory[i] = Dado(i+1,i);
-    }
 }
 
 Memoria::~Memoria() {
     delete[] memory;
+}
+
+void Memoria::carregar(std::ifstream & arq_in) {
+    int valor = 0;
+    for (int i = 0; i < totalPosicoes; ++i) {
+        arq_in >> valor;
+        memory[i] = Dado(valor,i);
+    }
 }
 
 bool Memoria::verificarEnd(int endereco) {

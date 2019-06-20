@@ -3,7 +3,7 @@
 #include "processador.h"
 
 Processador::Processador() {
-    L2 = Cache(6);
+    L2 = Cache(8);
     c1 = Core(&L2);
     c2 = Core(&L2);
 }

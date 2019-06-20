@@ -6,12 +6,11 @@ Core::Core() {}
 
 Core::Core(Cache * ni){                 //ni = Nível Inferior
     nivelInferior = ni;
-    cache = Cache(2);
+    cache = Cache(4);
 }
 
 bool Core::leitura(int endereco){
     Dado * dado = cache.getDado(endereco);
-    std::cout << "entrou aqui\n";
     if(dado != nullptr){
         std::cout << "\nO valor do endereço solicitado é: " << dado->getValor() << "\n";
         return true;
