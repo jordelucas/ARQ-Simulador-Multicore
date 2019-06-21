@@ -12,17 +12,17 @@ void cabecalho();
 int main() {
 
     cabecalho();
-    std::cout << "- Bem vindo!\n\n\n";
+    std::cout << "- Bem vindo(a) ao Simulador de Memória em Multicore!\n\n";
 /* Solicita quantidade de memórias cache */    
     int qtd_cores = 0;
     do {
-        std::cout << "Quantos cores deseja adicionar? ";
+        std::cout << "- Quantos cores deseja adicionar? ";
         std::cin >> qtd_cores;
         if(qtd_cores % 2 != 0) {
             cabecalho();
             std::cout << "ATENÇÃO!!\n";
             std::cout << "- É necerrário entrar com um número múltiplo de 2!\n";
-            std::cout << "- Vamos tentar novamente!\n\n\n";
+            std::cout << "- Vamos tentar novamente!\n\n";
         }
     } while (qtd_cores % 2 != 0);
 
@@ -55,15 +55,14 @@ int main() {
 
         switch (op) {
         case 1:
-            cabecalho();
             do {
-                std::cout << "- Informe o core que realizará a leitura: ";
+                std::cout << "\n- Informe o core que realizará a leitura: ";
                 std::cin >> idCore;
                 if(idCore > qtd_cores){
                     cabecalho();
                     std::cout << "ATENÇÃO!!\n";
                     std::cout << "- É necerrário entrar com um número inferior ou igual a " << qtd_cores << "\n";
-                    std::cout << "- Vamos tentar novamente!\n\n\n";
+                    std::cout << "- Vamos tentar novamente!\n\n";
                 }
             }while(idCore > qtd_cores);
 
@@ -81,42 +80,53 @@ int main() {
 
             /*  Lista os dados das memórias cache e solicita endereço
                 para leitura */
+            cabecalho();
+            std::cout << "---Leitura---\n\n";
             core->listarDados();
-            std::cout << " - Informe o endereço que deseja fazer leitura (0-31): ";
+            std::cout << "- Informe o endereço que deseja fazer leitura (0-31): ";
             std::cin >> endereco;
 
             /*  Busca pelo respectivo dado do endereço informado */
             /*  Caso não encontre nas memórias cache, é feita 
                 uma busca na memória principal.*/
+            cabecalho();
             if(core->leitura(endereco) == false){
                 Dado * dado = memoriaPincipal.getDado(endereco);
                 if(dado != nullptr){
                     /*  Ao encontrar o endereço na emória principal, 
                         o dado é carregado nas memórias cache para
                         novamente ser chamada a leitura */
+                    std::cout << "Localizado na memódia principal!\n";
+                    usleep(1000000);
+                    std::cout << "Carregando dado nas memórias cache...\n";
+                    usleep(2000000);
                     core->setCache(dado);
                     core->leitura(endereco);
-                    core->listarDados();
                 }else{
                     /*  Não encontrando o endereço informado, é exibida 
                         a mensagem de notificação do ocorrigo*/
-                    std::cout << "O endereço solicitado não faz parte da memória principal!\n";
+                    std::cout << "\nATENÇÃO!!\n";
+                    std::cout << "- O endereço solicitado não faz parte da memória principal!\n";
+                    std::cout << "- Vamos começar novamente!\n";
+                    std::cout << "Aguarde...\n";
+                    usleep(5000000);
+                    break;
                 }
-            }else{
-                core->listarDados();
             }
-            /* code */
+            std::cout << "\n";
+            core->listarDados();
+            std::cout << "Aguarde...\n";
+            usleep(5000000);
             break;
         case 2:
-            cabecalho();
             do {
-                std::cout << "- Informe o core que realizará a escrita: ";
+                std::cout << "\n- Informe o core que realizará a escrita: ";
                 std::cin >> idCore;
                 if(idCore > qtd_cores){
                     cabecalho();
                     std::cout << "ATENÇÃO!!\n";
                     std::cout << "- É necerrário entrar com um número inferior ou igual a " << qtd_cores << "\n";
-                    std::cout << "- Vamos tentar novamente!\n\n\n";
+                    std::cout << "- Vamos tentar novamente!\n\n";
                 }
             }while(idCore > qtd_cores);
 
@@ -134,33 +144,45 @@ int main() {
 
             /*  Lista os dados das memórias cache e solicita o endereço
                 para escrita e o novo valor a ser atribuído */
+            cabecalho();
+            std::cout << "---Escrita---\n\n";
             core->listarDados();
-            std::cout << "Informe o endereço que deseja alterar valor (0-31): ";
+            std::cout << "- Informe o endereço que deseja alterar valor (0-31): ";
             std::cin >> endereco;
-            std::cout << "Informe o novo valor: ";
+            std::cout << "- Informe o novo valor: ";
             std::cin >> novoValor;
 
             /*  Busca pelo respectivo dado do endereço informado */
             /*  Caso não encontre nas memórias cache, é feita 
                 uma busca na memória principal.*/
+            cabecalho();
             if(core->escrita(endereco, novoValor) == false){
                 Dado * dado = memoriaPincipal.getDado(endereco);
                 if(dado != nullptr){
                     /*  Ao encontrar o endereço na emória principal, 
                         o dado é carregado nas memórias cache para
                         novamente ser chamada a escrita */
-                        std::cout << "veio pra ca!\n";
+                    std::cout << "Localizado na memódia principal!\n";
+                    usleep(1000000);
+                    std::cout << "Carregando dado nas memórias cache...\n";
+                    usleep(2000000);
                     core->setCache(dado);
                     core->escrita(endereco, novoValor);
-                    core->listarDados();
                 }else{
                     /*  Não encontrando o endereço informado, é exibida 
                         a mensagem de notificação do ocorrigo*/
-                    std::cout << "O endereço solicitado não faz parte da memória principal!\n";
+                    std::cout << "\nATENÇÃO!!\n";
+                    std::cout << "- O endereço solicitado não faz parte da memória principal!\n";
+                    std::cout << "- Vamos começar novamente!\n";
+                    std::cout << "Aguarde...\n";
+                    usleep(5000000);
+                    break;
                 }
-            }else{
-                core->listarDados();
             }
+            std::cout << "\n";
+            core->listarDados();
+            std::cout << "Aguarde...\n";
+            usleep(5000000);
             break;
         case 0:
             break;
@@ -170,22 +192,17 @@ int main() {
             usleep(3000000);
             break;
         }
-        if(op == 1){
-        }else if (op == 2) {
-        }else if (op == 0) {
-            break;
-        }
     }
     return 0;
 }
 
 void cabecalho() {
     system("clear");
-    std::cout << "#####################################\n";
-    std::cout << "####                             ####\n";
-    std::cout << "####   SIMULADOR DE HIERARQUIA   ####\n";
-    std::cout << "####   DE MEMÓRIA EM MULTICORE   ####\n";
-    std::cout << "####                             ####\n";
-    std::cout << "#####################################\n";
-    std::cout << "                   Por: Jordevá Lucas\n\n\n";
+    std::cout << "###########################################\n";
+    std::cout << "#####                                 #####\n";
+    std::cout << "#####     SIMULADOR DE HIERARQUIA     #####\n";
+    std::cout << "#####     DE MEMÓRIA EM MULTICORE     #####\n";
+    std::cout << "#####                                 #####\n";
+    std::cout << "###########################################\n";
+    std::cout << "                         Por: Jordevá Lucas\n\n\n";
 }

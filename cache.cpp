@@ -38,12 +38,12 @@ Dado * Cache::getDado(int endereco){
 void Cache::listar () {
     for (int i = 0; i < totalPosicoes; i++) {
         if(L1[i] == nullptr){
-            std::cout << "disponível\n";
+            std::cout << "--|-- ";
         }else{
-            std::cout << L1[i]->getValor() << "|" << L1[i]->getEndereco() << "\n";
+            std::cout << L1[i]->getEndereco() << "|" <<  L1[i]->getValor() << "  ";
         }
     }
-    std::cout << "\n";
+    std::cout << "\n\n";
 }
 
 bool Cache::verificarEnd(int end) {
