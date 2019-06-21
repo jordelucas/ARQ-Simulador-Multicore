@@ -30,8 +30,8 @@ int main() {
     Processador * lista = new Processador[qtd_cores/2];
 
 /* Cria memória principal */
-    int tamanho = 32;
-    Memoria memoriaPincipal(tamanho); 
+    int tamanhoMemoria = 32;
+    Memoria memoriaPincipal(tamanhoMemoria); 
 
     std::ifstream arq_in;
     arq_in.open("teste.txt");
@@ -98,9 +98,15 @@ int main() {
                         novamente ser chamada a leitura */
                     std::cout << "Localizado na memódia principal!\n";
                     usleep(1000000);
-                    std::cout << "Carregando dado nas memórias cache...\n";
+                    std::cout << "Carregando dado em L2...\n";
                     usleep(2000000);
                     core->setCache(dado);
+                    if(endereco > 0) {
+                        core->setL2(memoriaPincipal.getDado(endereco-1));
+                    }
+                    if(endereco < (tamanhoMemoria-1)){
+                        core->setL2(memoriaPincipal.getDado(endereco+1));
+                    }
                     core->leitura(endereco);
                 }else{
                     /*  Não encontrando o endereço informado, é exibida 
@@ -164,9 +170,15 @@ int main() {
                         novamente ser chamada a escrita */
                     std::cout << "Localizado na memódia principal!\n";
                     usleep(1000000);
-                    std::cout << "Carregando dado nas memórias cache...\n";
+                    std::cout << "Carregando dado em L2...\n";
                     usleep(2000000);
                     core->setCache(dado);
+                    if(endereco > 0) {
+                        core->setL2(memoriaPincipal.getDado(endereco-1));
+                    }
+                    if(endereco < (tamanhoMemoria-1)){
+                        core->setL2(memoriaPincipal.getDado(endereco+1));
+                    }
                     core->escrita(endereco, novoValor);
                 }else{
                     /*  Não encontrando o endereço informado, é exibida 
@@ -185,6 +197,9 @@ int main() {
             usleep(5000000);
             break;
         case 0:
+            cabecalho();
+            std::cout << "Até a próxima!\n";
+            usleep(3000000);
             break;
         default:
             std::cout << "Opção inválida!\n";

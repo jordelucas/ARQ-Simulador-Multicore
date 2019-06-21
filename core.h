@@ -15,6 +15,8 @@ class Core {
         bool leitura(int endereco);
         bool escrita(int endereco, int novoValor);
         void setCache(Dado * dado);
+        void setL1(Dado * dado);
+        void setL2(Dado * dado);
         void listarDados();
 };
 

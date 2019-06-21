@@ -68,9 +68,21 @@ bool Core::escrita(int endereco, int novoValor){
 }
 
 void Core::setCache(Dado * dado) {
-    nivelInferior->setDado(dado);
-    cache.setDado(nivelInferior->getDado(dado->getEndereco()));
+    setL2(dado);
+    //setL1(dado);
 }
+
+void Core::setL2(Dado * dado) {
+    Dado * dadoTemp = nivelInferior->getDado(dado->getEndereco());
+    if(dadoTemp == nullptr){
+        nivelInferior->setDado(dado);
+    }
+}
+
+void Core::setL1(Dado * dado) {
+    cache.setDado(dado);
+}
+
 
 void Core::listarDados(){
     std::cout << "Situação das memórias Cache:\n\n\n";
